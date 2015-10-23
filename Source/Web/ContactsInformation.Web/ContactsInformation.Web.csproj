@@ -179,6 +179,20 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\ContactsInformation.Data.Common\ContactsInformation.Data.Common.csproj">
+      <Project>{632c18be-f199-4b74-8c47-e0b82b4a0346}</Project>
+      <Name>ContactsInformation.Data.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\ContactsInformation.Data.Models\ContactsInformation.Data.Models.csproj">
+      <Project>{3712aa39-1cf6-4c74-bc6a-5e860f8bd2cf}</Project>
+      <Name>ContactsInformation.Data.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\ContactsInformation.Data\ContactsInformation.Data.csproj">
+      <Project>{a8e65d8a-357c-4ca2-a44f-b83050de1064}</Project>
+      <Name>ContactsInformation.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

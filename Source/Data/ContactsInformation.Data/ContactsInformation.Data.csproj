@@ -49,11 +49,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContactsInformationDbContext.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ContactsInformation.Data.Models\ContactsInformation.Data.Models.csproj">
+      <Project>{3712aa39-1cf6-4c74-bc6a-5e860f8bd2cf}</Project>
+      <Name>ContactsInformation.Data.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
