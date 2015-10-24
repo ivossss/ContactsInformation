@@ -6,8 +6,11 @@
     using System.Web;
     using System.Web.Mvc;
 
+    using AutoMapper.QueryableExtensions;
+
     using ContactsInformation.Data.Common.Repositories;
     using ContactsInformation.Data.Models;
+    using ContactsInformation.Web.ViewModels.Home;
 
     public class HomeController : Controller
     {
@@ -20,7 +23,12 @@
 
         public ActionResult Index()
         {
-            return View();
+            var people = this.peopleRepository
+                .All()
+                .OrderBy(p => p.FirstName)
+                .ProjectTo<ShowPeopleViewModel>();
+
+            return View(people);
         }
     }
 }
