@@ -4,14 +4,14 @@
 namespace ContactsInformation.Web.App_Start
 {
     using System;
+    using System.Data.Entity;
     using System.Web;
-
-    using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
     using Ninject;
     using Ninject.Web.Common;
+    using Microsoft.Web.Infrastructure.DynamicModuleHelper;
+
     using ContactsInformation.Data;
-    using System.Data.Entity;
     using ContactsInformation.Data.Common.Repositories;
 
     public static class NinjectWebCommon
