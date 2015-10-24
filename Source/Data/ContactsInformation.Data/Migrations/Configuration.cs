@@ -3,9 +3,9 @@ namespace ContactsInformation.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using System.Text;
 
     using ContactsInformation.Data.Models;
-    using System.Text;
 
     internal sealed class Configuration : DbMigrationsConfiguration<ContactsInformationDbContext>
     {

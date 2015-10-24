@@ -7,12 +7,12 @@ namespace ContactsInformation.Web.App_Start
     using System.Data.Entity;
     using System.Web;
 
-    using Ninject;
-    using Ninject.Web.Common;
-    using Microsoft.Web.Infrastructure.DynamicModuleHelper;
-
     using ContactsInformation.Data;
     using ContactsInformation.Data.Common.Repositories;
+
+    using Microsoft.Web.Infrastructure.DynamicModuleHelper;
+    using Ninject;
+    using Ninject.Web.Common;
 
     public static class NinjectWebCommon
     {

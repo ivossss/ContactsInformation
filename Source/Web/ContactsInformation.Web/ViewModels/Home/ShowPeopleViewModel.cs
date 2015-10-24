@@ -1,8 +1,9 @@
 ﻿namespace ContactsInformation.Web.ViewModels.Home
 {
+    using System.ComponentModel.DataAnnotations;
+
     using ContactsInformation.Data.Models;
     using ContactsInformation.Web.Infrastructure.Mapping;
-    using System.ComponentModel.DataAnnotations;
 
     public class ShowPeopleViewModel : IMapFrom<Person>
     {

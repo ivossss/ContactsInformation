@@ -28,7 +28,7 @@
                 .OrderBy(p => p.FirstName)
                 .ProjectTo<ShowPeopleViewModel>();
 
-            return View(people);
+            return this.View(people);
         }
     }
 }

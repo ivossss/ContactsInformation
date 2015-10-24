@@ -2,8 +2,8 @@
 {
     using System.Data.Entity;
 
-    using ContactsInformation.Data.Models;
     using ContactsInformation.Data.Migrations;
+    using ContactsInformation.Data.Models;
 
     public class ContactsInformationDbContext : DbContext
     {

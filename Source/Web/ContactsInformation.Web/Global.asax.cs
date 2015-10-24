@@ -7,6 +7,7 @@
     using System.Web.Optimization;
     using System.Web.Routing;
 
+    using ContactsInformation.Web.App_Start;
     using ContactsInformation.Web.Infrastructure.Mapping;
 
     public class MvcApplication : System.Web.HttpApplication
