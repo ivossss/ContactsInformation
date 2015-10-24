@@ -2,7 +2,9 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class Person
+    using ContactsInformation.Data.Common.Models;
+
+    public class Person : DeletableEntity, IDeletableEntity
     {
         [Key]
         public int Id { get; set; }

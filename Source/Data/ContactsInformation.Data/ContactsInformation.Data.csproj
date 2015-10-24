@@ -57,6 +57,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ContactsInformation.Data.Common\ContactsInformation.Data.Common.csproj">
+      <Project>{632c18be-f199-4b74-8c47-e0b82b4a0346}</Project>
+      <Name>ContactsInformation.Data.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ContactsInformation.Data.Models\ContactsInformation.Data.Models.csproj">
       <Project>{3712aa39-1cf6-4c74-bc6a-5e860f8bd2cf}</Project>
       <Name>ContactsInformation.Data.Models</Name>
