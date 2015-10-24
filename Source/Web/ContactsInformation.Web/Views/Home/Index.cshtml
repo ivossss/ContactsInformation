@@ -10,7 +10,11 @@
         <tr>
             <th>@Html.DisplayNameFor(p => p.FirstOrDefault().FirstName)</th>
             <th>@Html.DisplayNameFor(p => p.FirstOrDefault().LastName)</th>
+            <th>@Html.DisplayNameFor(p => p.FirstOrDefault().Sex)</th>
+            <th>@Html.DisplayNameFor(p => p.FirstOrDefault().PhoneNumber)</th>
             <th>@Html.DisplayNameFor(p => p.FirstOrDefault().Status)</th>
+            <th>Change status</th>
+            <th>Delete person</th>
         </tr>
     </thead>
     <tbody>
@@ -19,8 +23,32 @@
             <tr>
                 <td>@person.FirstName</td>
                 <td>@person.LastName</td>
-                <td id="status-section-@person.Id">
-                    @Html.Action("ChangePersonStatus", "Home", new { personId = person.Id })
+                <td>@person.Sex</td>
+                <td>@person.PhoneNumber</td>
+                <td>
+                        <div id="status-section-@person.Id">
+                            @person.Status
+                        </div>
+                </td>
+                <td>
+                    @using (Ajax.BeginForm(
+                        "ChangePersonStatus",
+                        "Home",
+                        new { personId = person.Id },
+                        new AjaxOptions
+                        {
+                            UpdateTargetId = "status-section-" + person.Id,
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "POST",
+                        },
+                        new { role = "form", id = "status-form" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="submit" value="Change" class="btn btn-primary" />
+                        }
+                </td>
+                <td>
+                    <a href="#" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         }

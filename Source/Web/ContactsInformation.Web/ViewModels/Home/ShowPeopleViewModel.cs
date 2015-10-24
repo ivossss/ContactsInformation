@@ -16,5 +16,10 @@
         public string LastName { get; set; }
 
         public string Status { get; set; }
+
+        public string Sex { get; set; }
+
+        [Display(Name = "Phone number")]
+        public string PhoneNumber { get; set; }
     }
 }

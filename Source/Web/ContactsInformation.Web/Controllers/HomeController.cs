@@ -6,7 +6,6 @@
     using System.Web;
     using System.Web.Mvc;
 
-    using AutoMapper;
     using AutoMapper.QueryableExtensions;
 
     using ContactsInformation.Data.Common.Repositories;
@@ -32,42 +31,31 @@
             return this.View(people);
         }
 
-        [HttpGet]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult ChangePersonStatus(int personId)
         {
             var personFromDb = this.peopleRepository
                 .GetById(personId);
 
-            var mappedPerson = Mapper.Map<PersonStatusViewModel>(personFromDb);
-
-            return this.PartialView("_PersonStatusPartialView", mappedPerson);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult ChangePersonStatus(PersonStatusViewModel inputPerson)
-        {
-            if (ModelState.IsValid)
+            if (personFromDb == null)
             {
-                var personFromDb = this.peopleRepository
-                    .GetById(inputPerson.Id);
-
-                if (personFromDb.Status == "Active")
-                {
-                    personFromDb.Status = "Inactive";
-                }
-                else if (personFromDb.Status == "Inactive")
-                {
-                    personFromDb.Status = "Active";
-                }
-
-                this.peopleRepository.Update(personFromDb);
-                this.peopleRepository.SaveChanges();
-
-                inputPerson.Status = personFromDb.Status;
+                 return this.HttpNotFound("Post not found");
             }
 
-            return this.PartialView("_PersonStatusPartialView", inputPerson);
+            if (personFromDb.Status == "Active")
+            {
+                personFromDb.Status = "Inactive";
+            }
+            else if (personFromDb.Status == "Inactive")
+            {
+                personFromDb.Status = "Active";
+            }
+
+            this.peopleRepository.Update(personFromDb);
+            this.peopleRepository.SaveChanges();
+
+            return this.Content(personFromDb.Status);
         }
     }
 }
