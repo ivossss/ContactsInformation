@@ -33,6 +33,7 @@ namespace ContactsInformation.Data.Migrations
                 newPerson.LastName = this.GenerateRandomString(7, letters);
                 newPerson.Sex = this.GetRandomNumber(2) == 1 ? "Male" : "Female";
                 newPerson.PhoneNumber = this.GenerateRandomString(9, numbers);
+                newPerson.Status = "Active";
                 context.People.Add(newPerson);
             }
         }

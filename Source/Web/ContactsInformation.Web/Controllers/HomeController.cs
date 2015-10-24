@@ -6,6 +6,7 @@
     using System.Web;
     using System.Web.Mvc;
 
+    using AutoMapper;
     using AutoMapper.QueryableExtensions;
 
     using ContactsInformation.Data.Common.Repositories;
@@ -29,6 +30,44 @@
                 .ProjectTo<ShowPeopleViewModel>();
 
             return this.View(people);
+        }
+
+        [HttpGet]
+        public ActionResult ChangePersonStatus(int personId)
+        {
+            var personFromDb = this.peopleRepository
+                .GetById(personId);
+
+            var mappedPerson = Mapper.Map<PersonStatusViewModel>(personFromDb);
+
+            return this.PartialView("_PersonStatusPartialView", mappedPerson);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangePersonStatus(PersonStatusViewModel inputPerson)
+        {
+            if (ModelState.IsValid)
+            {
+                var personFromDb = this.peopleRepository
+                    .GetById(inputPerson.Id);
+
+                if (personFromDb.Status == "Active")
+                {
+                    personFromDb.Status = "Inactive";
+                }
+                else if (personFromDb.Status == "Inactive")
+                {
+                    personFromDb.Status = "Active";
+                }
+
+                this.peopleRepository.Update(personFromDb);
+                this.peopleRepository.SaveChanges();
+
+                inputPerson.Status = personFromDb.Status;
+            }
+
+            return this.PartialView("_PersonStatusPartialView", inputPerson);
         }
     }
 }
