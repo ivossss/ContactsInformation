@@ -11,6 +11,7 @@
     using ContactsInformation.Data.Common.Repositories;
     using ContactsInformation.Data.Models;
     using ContactsInformation.Web.ViewModels.Home;
+    using System.Net;
 
     public class HomeController : Controller
     {
@@ -56,6 +57,27 @@
             this.peopleRepository.SaveChanges();
 
             return this.Content(personFromDb.Status);
+        }
+
+        public ActionResult DeletePerson(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var personFromDb = this.peopleRepository
+                .GetById(id.Value);
+
+            if (personFromDb == null)
+            {
+                return this.HttpNotFound("Comment not found");
+            }
+
+            this.peopleRepository.Delete(id.Value);
+            this.peopleRepository.SaveChanges();
+
+            return this.RedirectToAction("Index");
         }
     }
 }

@@ -26,9 +26,9 @@
                 <td>@person.Sex</td>
                 <td>@person.PhoneNumber</td>
                 <td>
-                        <div id="status-section-@person.Id">
-                            @person.Status
-                        </div>
+                    <div id="status-section-@person.Id">
+                        @person.Status
+                    </div>
                 </td>
                 <td>
                     @using (Ajax.BeginForm(
@@ -42,13 +42,13 @@
                             HttpMethod = "POST",
                         },
                         new { role = "form", id = "status-form" }))
-                        {
-                            @Html.AntiForgeryToken()
-                            <input type="submit" value="Change" class="btn btn-primary" />
-                        }
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="submit" value="Change" class="btn btn-primary" />
+                    }
                 </td>
                 <td>
-                    <a href="#" class="btn btn-danger">Delete</a>
+                    @Html.ActionLink("Delete", "DeletePerson", "Home", new { id = person.Id }, new { @class = "btn btn-danger" })
                 </td>
             </tr>
         }
