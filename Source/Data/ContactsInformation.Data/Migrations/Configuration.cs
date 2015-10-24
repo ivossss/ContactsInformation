@@ -1,32 +1,59 @@
 namespace ContactsInformation.Data.Migrations
 {
     using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<ContactsInformation.Data.ContactsInformationDbContext>
+    using ContactsInformation.Data.Models;
+    using System.Text;
+
+    internal sealed class Configuration : DbMigrationsConfiguration<ContactsInformationDbContext>
     {
+        private readonly Random random = new Random();
+
         public Configuration()
         {
             this.AutomaticMigrationsEnabled = true;
             this.AutomaticMigrationDataLossAllowed = true;
         }
 
-        protected override void Seed(ContactsInformation.Data.ContactsInformationDbContext context)
+        protected override void Seed(ContactsInformationDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            if (context.People.Any())
+            {
+                return;
+            }
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            char[] letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".ToCharArray();
+            char[] numbers = "0123456789".ToCharArray();
+            for (int i = 0; i < 20; i++)
+            {
+                var newPerson = new Person();
+                newPerson.FirstName = this.GenerateRandomString(5, letters);
+                newPerson.LastName = this.GenerateRandomString(7, letters);
+                newPerson.Sex = this.GetRandomNumber(2) == 1 ? "Male" : "Female";
+                newPerson.PhoneNumber = this.GenerateRandomString(9, numbers);
+                context.People.Add(newPerson);
+            }
+        }
+
+        private string GenerateRandomString(int length, char[] allowedChars)
+        {
+            StringBuilder builder = new StringBuilder();
+            int randomNumber;
+
+            for (int i = 0; i < length; i++)
+            {
+                randomNumber = this.GetRandomNumber(allowedChars.Length);
+                builder.Append(allowedChars[randomNumber]);
+            }
+
+            return builder.ToString();
+        }
+
+        private int GetRandomNumber(int maxValue)
+        {            
+            return this.random.Next(maxValue);
         }
     }
 }
