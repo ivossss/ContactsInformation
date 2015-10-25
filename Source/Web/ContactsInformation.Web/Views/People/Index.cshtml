@@ -1,0 +1,68 @@
+﻿@model IEnumerable<ContactsInformation.Web.ViewModels.People.ShowPeopleViewModel>
+@{
+    ViewBag.Title = "People";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@{
+    const string ControllerName = "People";
+}
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(p => p.FirstOrDefault().FirstName)</th>
+            <th>@Html.DisplayNameFor(p => p.FirstOrDefault().LastName)</th>
+            <th>@Html.DisplayNameFor(p => p.FirstOrDefault().Sex)</th>
+            <th>@Html.DisplayNameFor(p => p.FirstOrDefault().PhoneNumber)</th>
+            <th>@Html.DisplayNameFor(p => p.FirstOrDefault().Status)</th>
+            <th>Change status</th>
+            <th>Delete person</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var person in Model)
+        {
+            <tr>
+                <td>@person.FirstName</td>
+                <td>@person.LastName</td>
+                <td>@person.Sex</td>
+                <td>@person.PhoneNumber</td>
+                <td>
+                    <div id="status-section-@person.Id">
+                        @person.Status
+                    </div>
+                </td>
+                <td>
+                    @using (Ajax.BeginForm(
+                        "ChangePersonStatus",
+                        ControllerName,
+                        new { personId = person.Id },
+                        new AjaxOptions
+                        {
+                            UpdateTargetId = "status-section-" + person.Id,
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "POST",
+                        },
+                        new { role = "form", id = "status-form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="submit" value="Change" class="btn btn-primary" />
+                    }
+                </td>
+                <td>
+                    @using (Html.BeginForm("DeletePerson", ControllerName, new { id = person.Id }, FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="submit" value="Delete" class="btn btn-danger" />
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryAjax")
+}

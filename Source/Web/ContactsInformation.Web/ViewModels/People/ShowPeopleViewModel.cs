@@ -1,4 +1,4 @@
-﻿namespace ContactsInformation.Web.ViewModels.Home
+﻿namespace ContactsInformation.Web.ViewModels.People
 {
     using System.ComponentModel.DataAnnotations;
 
