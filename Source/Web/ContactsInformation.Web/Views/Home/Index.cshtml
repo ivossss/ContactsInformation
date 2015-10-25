@@ -48,7 +48,11 @@
                     }
                 </td>
                 <td>
-                    @Html.ActionLink("Delete", "DeletePerson", "Home", new { id = person.Id }, new { @class = "btn btn-danger" })
+                    @using (Html.BeginForm("DeletePerson", "Home", new { id = person.Id }, FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="submit" value="Delete" class="btn btn-danger" />
+                    }
                 </td>
             </tr>
         }

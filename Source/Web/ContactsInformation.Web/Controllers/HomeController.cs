@@ -1,9 +1,8 @@
 ﻿namespace ContactsInformation.Web.Controllers
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Web;
+    using System.Net;
     using System.Web.Mvc;
 
     using AutoMapper.QueryableExtensions;
@@ -11,7 +10,6 @@
     using ContactsInformation.Data.Common.Repositories;
     using ContactsInformation.Data.Models;
     using ContactsInformation.Web.ViewModels.Home;
-    using System.Net;
 
     public class HomeController : Controller
     {
@@ -59,6 +57,8 @@
             return this.Content(personFromDb.Status);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult DeletePerson(int? id)
         {
             if (id == null)
