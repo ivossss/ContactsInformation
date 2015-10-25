@@ -34,6 +34,7 @@ namespace ContactsInformation.Data.Migrations
                 newPerson.Sex = this.GetRandomNumber(2) == 1 ? "Male" : "Female";
                 newPerson.PhoneNumber = this.GenerateRandomString(5, 9, numbers);
                 newPerson.Status = "Active";
+                newPerson.PhotoUrl = "http://cdn3.rd.io/user/no-user-image-square.jpg";
                 context.People.Add(newPerson);
             }
         }

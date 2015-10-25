@@ -1,0 +1,28 @@
+﻿@model ContactsInformation.Web.ViewModels.People.PersonDetailsViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<dl class="dl-horizontal">
+    <dt class="text-primary">@Html.DisplayNameFor(p => p.Id)</dt>
+    <dd>@Html.DisplayFor(p => p.Id)</dd>
+    <dt class="text-primary">@Html.DisplayNameFor(p => p.FirstName)</dt>
+    <dd>@Html.DisplayFor(p => p.FirstName)</dd>
+    <dt class="text-primary">@Html.DisplayNameFor(p => p.LastName)</dt>
+    <dd>@Html.DisplayFor(p => p.LastName)</dd>
+    <dt class="text-primary">@Html.DisplayNameFor(p => p.Sex)</dt>
+    <dd>@Model.Sex</dd>
+    <dt class="text-primary">@Html.DisplayNameFor(p => p.PhoneNumber)</dt>
+    <dd>@Model.PhoneNumber</dd>
+    <dt class="text-primary">@Html.DisplayNameFor(p => p.Status)</dt>
+    <dd>@Html.Raw(Model.Status)</dd>
+    <dt class="text-primary">@Html.DisplayNameFor(p => p.PhotoUrl)</dt>
+    <dd>@Html.DisplayFor(p => p.PhotoUrl)</dd>
+    <dt class="text-primary">Photo</dt>
+    <dd><img src="@Model.PhotoUrl" /></dd>
+</dl>
+
+@Html.ActionLink("Back", "Index", "People", null, new { @class = "btn btn-primary" })

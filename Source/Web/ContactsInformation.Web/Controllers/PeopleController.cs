@@ -5,6 +5,7 @@
     using System.Net;
     using System.Web.Mvc;
 
+    using AutoMapper;
     using AutoMapper.QueryableExtensions;
 
     using ContactsInformation.Data.Common.Repositories;
@@ -55,6 +56,25 @@
             this.peopleRepository.SaveChanges();
 
             return this.Content(personFromDb.Status);
+        }
+
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var personFromDb = this.peopleRepository
+                .GetById(id.Value);
+
+            if (personFromDb == null)
+            {
+                return this.HttpNotFound("Post not found");
+            }
+
+            var mappedPerson = Mapper.Map<PersonDetailsViewModel>(personFromDb);
+            return this.View(mappedPerson);
         }
 
         [HttpPost]

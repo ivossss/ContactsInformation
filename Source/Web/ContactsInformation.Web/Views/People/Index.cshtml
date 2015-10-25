@@ -18,6 +18,7 @@
             <th>@Html.DisplayNameFor(p => p.FirstOrDefault().PhoneNumber)</th>
             <th>@Html.DisplayNameFor(p => p.FirstOrDefault().Status)</th>
             <th>Change status</th>
+            <th>Person details</th>
             <th>Delete person</th>
         </tr>
     </thead>
@@ -50,6 +51,9 @@
                         @Html.AntiForgeryToken()
                         <input type="submit" value="Change" class="btn btn-primary" />
                     }
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", ControllerName, new { id = person.Id }, new { @class = "btn btn-primary" })
                 </td>
                 <td>
                     @using (Html.BeginForm("DeletePerson", ControllerName, new { id = person.Id }, FormMethod.Post))
